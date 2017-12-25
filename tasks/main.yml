@@ -20,7 +20,7 @@
   with_dict: "{{ targets }}"
   become: yes
   notify: Restart services
-- name: Link to scripts
+- name: Link to initscript
   file:
     state: link
     path: /etc/init.d/autossh.{{ item.key }}
