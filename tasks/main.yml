@@ -5,3 +5,9 @@
 - name: Create user
   user: name=autossh shell=/sbin/nologin
   become: yes
+- name: Copy initscript
+  copy:
+    src: initscript.sh
+    dest: /etc/init.d/autossh
+    mode: 0755
+  become: yes
