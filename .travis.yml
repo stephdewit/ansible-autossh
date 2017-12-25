@@ -9,4 +9,4 @@ install:
   - pip install ansible
 
 script:
-  - ansible-playbook tests/test.yml --syntax-check
+  - ansible-playbook -i "localhost," tests/test.yml --syntax-check
