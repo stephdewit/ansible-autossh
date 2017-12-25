@@ -24,3 +24,7 @@
     src: /etc/init.d/autossh
   with_dict: "{{ targets }}"
   become: yes
+- name: Start services
+  service: name=autossh.{{ item.key }} enabled=yes state=started
+  with_dict: "{{ targets }}"
+  become: yes
