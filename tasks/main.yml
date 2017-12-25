@@ -13,7 +13,7 @@
     mode: 0755
   become: yes
   notify: Restart services
-- name: Configure
+- name: Configure services
   template:
     src: configuration.j2
     dest: /etc/conf.d/autossh.{{ item.key }}
