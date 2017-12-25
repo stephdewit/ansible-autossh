@@ -1,2 +1,4 @@
 ---
-# tasks file for ansible-autossh
+- name: Install
+  package: name=autossh state=latest
+  become: yes
