@@ -2,6 +2,7 @@
 - name: Install autossh
   package: name=autossh state=latest
   become: yes
+  notify: Restart services
 - name: Create user
   user: name=autossh shell=/sbin/nologin
   become: yes
@@ -11,6 +12,7 @@
     dest: /etc/init.d/autossh
     mode: 0755
   become: yes
+  notify: Restart services
 - name: Configure
   template:
     src: configuration.j2
