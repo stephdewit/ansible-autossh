@@ -19,6 +19,7 @@
     dest: /etc/conf.d/autossh.{{ item.key }}
   with_dict: "{{ targets }}"
   become: yes
+  notify: Restart services
 - name: Link to scripts
   file:
     state: link
