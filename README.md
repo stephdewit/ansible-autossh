@@ -28,11 +28,16 @@ Example Playbook
       roles:
         - role: stephdewit.autossh
           targets:
-            server_name:
-              host: server_name.example.com
+            app_server_01:
+              host: app01.example.com
               port: 22
               login: me
               local_forwards: 3000:3000 3010:3010 4000:4000
+            app_server_02:
+              host: app02.example.com
+              port: 22
+              login: me
+              local_forwards: 3020:3020 4010:4000
 
 License
 -------
