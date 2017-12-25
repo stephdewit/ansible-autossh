@@ -2,3 +2,6 @@
 - name: Install
   package: name=autossh state=latest
   become: yes
+- name: Create user
+  user: name=autossh shell=/sbin/nologin
+  become: yes
