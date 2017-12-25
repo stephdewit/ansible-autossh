@@ -1,5 +1,5 @@
 ---
-- name: Install
+- name: Install autossh
   package: name=autossh state=latest
   become: yes
 - name: Create user
