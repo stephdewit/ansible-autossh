@@ -11,3 +11,16 @@
     dest: /etc/init.d/autossh
     mode: 0755
   become: yes
+- name: Configure
+  template:
+    src: configuration.j2
+    dest: /etc/conf.d/autossh.{{ item.key }}
+  with_dict: "{{ targets }}"
+  become: yes
+- name: Link to scripts
+  file:
+    state: link
+    path: /etc/init.d/autossh.{{ item.key }}
+    src: /etc/init.d/autossh
+  with_dict: "{{ targets }}"
+  become: yes
