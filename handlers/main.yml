@@ -1,5 +1,4 @@
 ---
 - name: Restart services
-  service: name=autossh.{{ item.key }} state=restarted
-  with_dict: "{{ targets }}"
+  service: name=autossh.{{ autossh_name }} state=restarted
   become: yes

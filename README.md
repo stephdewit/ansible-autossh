@@ -6,15 +6,16 @@ Opens SSH connections from an OpenRC system.
 Requirements
 ------------
 
-User is authenticated thanks to a private key named as the `server_name` key.
+User is authenticated thanks to a private key named as the `autossh_name` key.
 
 Role Variables
 --------------
 
-- __targets.<server_name>.host__: Hostname or IP address to connect to.
-- __targets.<server_name>.port__: TCP port to connect to.
-- __targets.<server_name>.login__: Username used to authenticate on remote server.
-- __targets.<server_name>.local_forwards__: Local port forwards to remote localhost. Written as `<local_port>:<remote_port>` and separated by spaces.
+- `autossh_name`: Key to identify connection.
+- `autossh_host`: Hostname or IP address to connect to.
+- `autossh_port`: TCP port to connect to.
+- `autossh_login`: Username used to authenticate on remote server.
+- `autossh_local_forwards`: Local port forwards to remote localhost. Written as `<local_port>:<remote_port>` and separated by spaces.
 
 Dependencies
 ------------
@@ -27,17 +28,11 @@ Example Playbook
     - hosts: proxy_servers
       roles:
         - role: stephdewit.autossh
-          targets:
-            app_server_01:
-              host: app01.example.com
-              port: 22
-              login: me
-              local_forwards: 3000:3000 3010:3010 4000:4000
-            app_server_02:
-              host: app02.example.com
-              port: 22
-              login: me
-              local_forwards: 3020:3020 4010:4000
+          autossh_name: app_server_01
+          autossh_host: app01.example.com
+          autossh_port: 2222
+          autossh_login: me
+          autossh_local_forwards: 3000:3000 3010:3010 4000:4000
 
 License
 -------

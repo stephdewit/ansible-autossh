@@ -16,18 +16,15 @@
 - name: Configure services
   template:
     src: configuration.j2
-    dest: /etc/conf.d/autossh.{{ item.key }}
-  with_dict: "{{ targets }}"
+    dest: /etc/conf.d/autossh.{{ autossh_name }}
   become: yes
   notify: Restart services
 - name: Link to initscript
   file:
     state: link
-    path: /etc/init.d/autossh.{{ item.key }}
+    path: /etc/init.d/autossh.{{ autossh_name }}
     src: /etc/init.d/autossh
-  with_dict: "{{ targets }}"
   become: yes
 - name: Start services
-  service: name=autossh.{{ item.key }} enabled=yes state=started
-  with_dict: "{{ targets }}"
+  service: name=autossh.{{ autossh_name }} enabled=yes state=started
   become: yes

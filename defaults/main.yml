@@ -1,2 +1,2 @@
 ---
-targets: {}
+autossh_port: 22
