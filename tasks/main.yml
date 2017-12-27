@@ -19,6 +19,12 @@
       default({}) |
       combine({autossh_name: create_user_result.ssh_public_key})
       }}
+- name: Add host key
+  known_hosts:
+    name: "[{{ autossh_host }}]:{{ autossh_port }}"
+    key: "{{ autossh_hostkey }}"
+  become: true
+  become_user: autossh
 - name: Copy initscript
   copy:
     src: initscript.sh
