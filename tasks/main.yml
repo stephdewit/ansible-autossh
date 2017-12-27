@@ -4,8 +4,21 @@
   become: yes
   notify: Restart services
 - name: Create user
-  user: name=autossh shell=/sbin/nologin
+  user:
+    name: autossh
+    shell: /sbin/nologin
+    generate_ssh_key: yes
+    ssh_key_file: .ssh/{{ autossh_name }}
   become: yes
+  register: create_user_result
+- name: Export public key
+  set_fact:
+    autossh_public_keys: >-
+      {{
+      autossh_public_keys |
+      default({}) |
+      combine({autossh_name: create_user_result.ssh_public_key})
+      }}
 - name: Copy initscript
   copy:
     src: initscript.sh
