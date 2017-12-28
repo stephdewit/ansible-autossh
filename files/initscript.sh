@@ -14,11 +14,6 @@ start() {
 	mkdir -p /run/autossh /var/log/autossh
 	chown autossh:autossh /run/autossh /var/log/autossh
 
-	forwards=''
-	for forward in $LOCALFORWARDS; do
-		forwards="$forwards -L $(echo $forward | sed 's/:/:localhost:/')"
-	done
-
 	export AUTOSSH_PIDFILE
 	export AUTOSSH_LOGFILE
 
@@ -31,7 +26,7 @@ start() {
 			-l $LOGIN \
 			$HOST -p $PORT \
 			-i /home/autossh/.ssh/$servername \
-			$forwards
+			$OPTIONS
 	eend $?
 }
 
