@@ -2,8 +2,8 @@
 - name: Install autossh
   package: name=autossh state=latest
   become: yes
-  notify: Restart services
-- name: Create user
+  notify: Restart service
+- name: Create user with {{ autossh_name }} key
   user:
     name: autossh
     shell: /sbin/nologin
@@ -11,7 +11,7 @@
     ssh_key_file: .ssh/{{ autossh_name }}
   become: yes
   register: create_user_result
-- name: Export public key
+- name: Export public key for {{ autossh_name }}
   set_fact:
     autossh_public_keys: >-
       {{
@@ -19,7 +19,7 @@
       default({}) |
       combine({autossh_name: create_user_result.ssh_public_key})
       }}
-- name: Add host key
+- name: Add {{ autossh_name }} host key
   known_hosts:
     name: "[{{ autossh_host }}]:{{ autossh_port }}"
     key: "{{ autossh_hostkey }}"
@@ -31,19 +31,19 @@
     dest: /etc/init.d/autossh
     mode: 0755
   become: yes
-  notify: Restart services
-- name: Configure services
+  notify: Restart service
+- name: Configure {{ autossh_name }} service
   template:
     src: configuration.j2
     dest: /etc/conf.d/autossh.{{ autossh_name }}
   become: yes
-  notify: Restart services
-- name: Link to initscript
+  notify: Restart service
+- name: Link to {{ autossh_name }} initscript
   file:
     state: link
     path: /etc/init.d/autossh.{{ autossh_name }}
     src: /etc/init.d/autossh
   become: yes
-- name: Start services
+- name: Start {{ autossh_name }} service
   service: name=autossh.{{ autossh_name }} enabled=yes state=started
   become: yes

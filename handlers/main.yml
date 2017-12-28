@@ -1,4 +1,4 @@
 ---
-- name: Restart services
+- name: Restart service
   service: name=autossh.{{ autossh_name }} state=restarted
   become: yes
