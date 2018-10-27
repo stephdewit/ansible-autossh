@@ -1,2 +1,3 @@
 ---
 autossh_port: 22
+autossh_hash_host: no

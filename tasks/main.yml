@@ -23,6 +23,7 @@
   known_hosts:
     name: "[{{ autossh_host }}]:{{ autossh_port }}"
     key: "{{ autossh_hostkey }}"
+    hash_host: "{{ autossh_hash_host }}"
   become: true
   become_user: autossh
 - name: Copy initscript
