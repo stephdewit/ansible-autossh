@@ -16,6 +16,7 @@ Role Variables
 - `autossh_port`: TCP port to connect to. Default: `22`.
 - `autossh_login`: Username used to authenticate on remote server.
 - `autossh_hostkey`: Host key of the remote server.
+- `autossh_hash_host`: Host key of the remote server. Default: `no`.
 - `autossh_options`: Parameters added to the SSH command line, e.g. for port forwarding.
 
 An `autossh_public_keys` fact is set and contains a dictionary, indexed by the `autossh_name` value, with every public key.
