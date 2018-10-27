@@ -13,7 +13,7 @@ Role Variables
 
 - `autossh_name`: Key to identify connection.
 - `autossh_host`: Hostname or IP address to connect to.
-- `autossh_port`: TCP port to connect to.
+- `autossh_port`: TCP port to connect to. Default: `22`.
 - `autossh_login`: Username used to authenticate on remote server.
 - `autossh_hostkey`: Host key of the remote server.
 - `autossh_options`: Parameters added to the SSH command line, e.g. for port forwarding.
